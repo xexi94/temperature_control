@@ -1,0 +1,14 @@
+missing module named nt - imported by os, ntpath, shutil, /media/sergi/HDD/AN/INTSRUMENTS/temperature_control/interface_linux.pyw
+missing module named 'org.python' - imported by pickle, /media/sergi/HDD/AN/INTSRUMENTS/temperature_control/interface_linux.pyw, xml.sax
+excluded module named _frozen_importlib - imported by importlib, importlib.abc, /media/sergi/HDD/AN/INTSRUMENTS/temperature_control/interface_linux.pyw
+missing module named _frozen_importlib_external - imported by importlib._bootstrap, importlib, importlib.abc, /media/sergi/HDD/AN/INTSRUMENTS/temperature_control/interface_linux.pyw
+missing module named _winreg - imported by platform, /media/sergi/HDD/AN/INTSRUMENTS/temperature_control/interface_linux.pyw
+missing module named _scproxy - imported by urllib.request
+missing module named java - imported by platform, /media/sergi/HDD/AN/INTSRUMENTS/temperature_control/interface_linux.pyw
+missing module named 'java.lang' - imported by platform, /media/sergi/HDD/AN/INTSRUMENTS/temperature_control/interface_linux.pyw, xml.sax._exceptions
+missing module named vms_lib - imported by platform, /media/sergi/HDD/AN/INTSRUMENTS/temperature_control/interface_linux.pyw
+missing module named winreg - imported by platform, mimetypes, /media/sergi/HDD/AN/INTSRUMENTS/temperature_control/interface_linux.pyw, urllib.request
+missing module named org - imported by copy, /media/sergi/HDD/AN/INTSRUMENTS/temperature_control/interface_linux.pyw
+missing module named msvcrt - imported by subprocess, /media/sergi/HDD/AN/INTSRUMENTS/temperature_control/interface_linux.pyw, getpass
+missing module named _winapi - imported by subprocess, /media/sergi/HDD/AN/INTSRUMENTS/temperature_control/interface_linux.pyw
+missing module named _dummy_threading - imported by dummy_threading, /media/sergi/HDD/AN/INTSRUMENTS/temperature_control/interface_linux.pyw
