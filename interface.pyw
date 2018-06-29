@@ -1,8 +1,8 @@
 import tkinter as tk                # python 3
 #from tkinter import font  as tkfont # python 3
-#import Tkinter as tk     # python 2
-#import tkFont as tkfont  # python 2
-#hola
+import os
+import PIL
+from PIL import Image
 
 class SampleApp(tk.Tk):
 
@@ -17,7 +17,10 @@ class SampleApp(tk.Tk):
         #self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
         self.title("ProgramName") #windowtitle
         self.resizable(0,0) #resizable?
-        self.iconbitmap("thermometer.ico") #small corner icon
+        if os.name == 'nt':
+            self.iconbitmap("Images/thermometer.ico") #small corner icon
+        elif os.name == 'posix':
+            null   
         self.geometry("850x550") #window dimension
         self.config(menu=MenuBar)
         
@@ -49,12 +52,13 @@ class SampleApp(tk.Tk):
         MenuFile.add_separator()
         MenuFile.add_command(label="Export Data")
         MenuFile.add_separator()
+        MenuFile.add_command(label="Close",command=lambda: self.show_frame("StartPage"))
         MenuFile.add_command(label="Exit",command=exit)
 
         EditFile=tk.Menu(MenuBar, tearoff=0)
 
         ToolFile=tk.Menu(MenuBar,tearoff=0)
-        ToolFile.add_command(label="Serial Configuration")
+        ToolFile.add_command(label="Serial Configuration",command=lambda: self.show_frame("PageTwo"))
 
         HelpFile=tk.Menu(MenuBar, tearoff=0)
         HelpFile.add_command(label="About ProgramName ...")
@@ -78,13 +82,14 @@ class StartPage(tk.Frame):
         self.controller = controller
         label = tk.Label(self, text="This is the start page")#, font=controller.title_font
         label.pack(side="top", fill="x", pady=10)
-
+        '''
         button1 = tk.Button(self, text="Go to Page One",
                             command=lambda: controller.show_frame("PageOne"))
         button2 = tk.Button(self, text="Go to Page Two",
                             command=lambda: controller.show_frame("PageTwo"))
         button1.pack()
         button2.pack()
+        '''
 
 
 class PageOne(tk.Frame):
@@ -92,24 +97,31 @@ class PageOne(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = tk.Label(self, text="This is page 1")#, font=controller.title_font
-        label.pack(side="top", fill="x", pady=10)
+        #label = tk.Label(self, text="This is the measure page")#, font=controller.title_font
+        #label.pack(side="top", fill="x", pady=10)
+        start = tk.Button(self)
+        self.start_photo=tk.PhotoImage(file="Images/if_Right_arrow_2104160.png")
+        
+        start.config(image=self.start_photo,width="20",height="20")
+        start.pack(side=tk.TOP,anchor=tk.W)
+        '''
         button = tk.Button(self, text="Go to the start page",
                            command=lambda: controller.show_frame("StartPage"))
         button.pack()
-
+        '''
 
 class PageTwo(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = tk.Label(self, text="This is page 2")#, font=controller.title_font
+        label = tk.Label(self, text="This is serial configuration page")#, font=controller.title_font
         label.pack(side="top", fill="x", pady=10)
+        '''
         button = tk.Button(self, text="Go to the start page",
                            command=lambda: controller.show_frame("StartPage"))
         button.pack()
-
+        '''
 
 if __name__ == "__main__":
     app = SampleApp()
