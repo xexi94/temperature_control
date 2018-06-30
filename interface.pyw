@@ -1,8 +1,8 @@
 import tkinter as tk                # python 3
 #from tkinter import font  as tkfont # python 3
 import os
-import PIL
-from PIL import Image
+#import PIL
+#from PIL import Image
 
 class SampleApp(tk.Tk):
 
@@ -15,17 +15,14 @@ class SampleApp(tk.Tk):
         
         MenuBar=tk.Menu(self)
         #self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
-        self.title("ProgramName") #windowtitle
-        self.resizable(0,0) #resizable?
+        self.title("ProgramName") 
+        self.resizable(0,0) 
         if os.name == 'nt':
-            self.iconbitmap("Images/thermometer.ico") #small corner icon
+            self.iconbitmap("Images/thermometer.ico") 
         elif os.name == 'posix':
             null   
-        self.geometry("850x550") #window dimension
+        self.geometry("850x550") 
         self.config(menu=MenuBar)
-        
-        
-
         # the container is where we'll stack a bunch of frames
         # on top of each other, then the one we want visible
         # will be raised above the others
@@ -33,7 +30,6 @@ class SampleApp(tk.Tk):
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
-
         self.frames = {}
         for F in (StartPage, PageOne, PageTwo):
             page_name = F.__name__
@@ -44,7 +40,6 @@ class SampleApp(tk.Tk):
             # the one on the top of the stacking order
             # will be the one that is visible.
             frame.grid(row=0, column=0, sticky="nsew")
-
         self.show_frame("StartPage")
         
         MenuFile=tk.Menu(MenuBar, tearoff=0)
@@ -95,20 +90,70 @@ class StartPage(tk.Frame):
 class PageOne(tk.Frame):
 
     def __init__(self, parent, controller):
+        
+        def option_changed(*args):
+            #print (self.option.get())
+            
+            return self.option.get() 
         tk.Frame.__init__(self, parent)
         self.controller = controller
         #label = tk.Label(self, text="This is the measure page")#, font=controller.title_font
         #label.pack(side="top", fill="x", pady=10)
+        
+        # BUTTONS
         start = tk.Button(self)
         self.start_photo=tk.PhotoImage(file="Images/if_Right_arrow_2104160.png")
-        
         start.config(image=self.start_photo,width="20",height="20")
-        start.pack(side=tk.TOP,anchor=tk.W)
+        stop = tk.Button(self)
+        self.stop_photo=tk.PhotoImage(file="Images/if_Arrows_62_2104119.png")
+        stop.config(image=self.stop_photo,width="20",height="20")
+        restart = tk.Button(self)
+        self.restart_photo=tk.PhotoImage(file="Images/if_Arrow_42_2104127.png")
+        restart.config(image=self.restart_photo,width="20",height="20")
+        aux1 = tk.Button(self)
+        self.aux1_photo=tk.PhotoImage(file="Images/if_Arrow_21_2104182.png")
+        aux1.config(image=self.aux1_photo,width="20",height="20")
+        aux2 = tk.Button(self)
+        aux2.config(image=self.aux1_photo,width="20",height="20")
+        aux3 = tk.Button(self)
+        aux3.config(image=self.aux1_photo,width="20",height="20")
+        aux4 = tk.Button(self)
+        aux4.config(image=self.aux1_photo,width="20",height="20")
+        aux5 = tk.Button(self)
+        aux5.config(image=self.aux1_photo,width="20",height="20")
+        aux6 = tk.Button(self)
+        aux6.config(image=self.aux1_photo,width="20",height="20")
+        aux7 = tk.Button(self)
+        aux7.config(image=self.aux1_photo,width="20",height="20")
+        
+        start.pack(side=tk.LEFT,anchor=tk.N)
+        stop.pack(side=tk.LEFT,anchor=tk.N)
+        restart.pack(side=tk.LEFT,anchor=tk.N)
+        aux1.pack(side=tk.LEFT,anchor=tk.N)
+        aux2.pack(side=tk.LEFT,anchor=tk.N)
+        aux3.pack(side=tk.LEFT,anchor=tk.N)
+        aux4.pack(side=tk.LEFT,anchor=tk.N)
+        aux5.pack(side=tk.LEFT,anchor=tk.N)
+        aux6.pack(side=tk.LEFT,anchor=tk.N)
+        aux7.pack(side=tk.LEFT,anchor=tk.N)
+
+        # GRAPH OPTIONS SELCTOR
+        self.option = tk.StringVar(self)
+        self.option.set("Temperature")
+        self.option.trace("w",option_changed)
+        
+        w=tk.OptionMenu(self,self.option,"Temperature","Intensity","Voltage","Resistance")
+        #w.config(width="20")
+        w.pack(side=tk.RIGHT,anchor=tk.N)
+        
+        
         '''
         button = tk.Button(self, text="Go to the start page",
                            command=lambda: controller.show_frame("StartPage"))
         button.pack()
         '''
+       
+            
 
 class PageTwo(tk.Frame):
 
