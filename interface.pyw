@@ -12,7 +12,20 @@ class SampleApp(tk.Tk):
             self.destroy()
         
         tk.Tk.__init__(self, *args, **kwargs)
-        
+        def popupmsg():
+            popup = tk.Tk()
+            popup.resizable(0,0)
+            popup.geometry("200x100")
+            if os.name == 'nt':
+                popup.iconbitmap("Images/thermometer.ico") 
+            elif os.name == 'posix':
+                null
+            popup.wm_title("")
+            message=tk.Label(popup,text="description")
+            Bl = tk.Button(popup,text="Okay",command=popup.destroy)
+            message.pack()
+            Bl.pack(side=tk.BOTTOM,pady=4)
+            popup.mainloop() 
         MenuBar=tk.Menu(self)
         #self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
         self.title("ProgramName") 
@@ -56,7 +69,7 @@ class SampleApp(tk.Tk):
         ToolFile.add_command(label="Serial Configuration",command=lambda: self.show_frame("PageTwo"))
 
         HelpFile=tk.Menu(MenuBar, tearoff=0)
-        HelpFile.add_command(label="About ProgramName ...")
+        HelpFile.add_command(label="About ProgramName ...",command=popupmsg)
         
         MenuBar.add_cascade(label="File",menu=MenuFile)
         MenuBar.add_cascade(label="Edit",menu=EditFile)
@@ -96,6 +109,10 @@ class PageOne(tk.Frame):
             
             return self.option.get() 
         tk.Frame.__init__(self, parent)
+        
+        def _create_circle(self, x, y, r, **kwargs):
+            return self.create_oval(x-r, y-r, x+r, y+r, **kwargs)
+        tk.Canvas.create_circle = _create_circle
         self.controller = controller
         #label = tk.Label(self, text="This is the measure page")#, font=controller.title_font
         #label.pack(side="top", fill="x", pady=10)
@@ -146,7 +163,16 @@ class PageOne(tk.Frame):
         #w.config(width="20")
         w.pack(side=tk.RIGHT,anchor=tk.N)
         
-        
+        # SERIAL LED
+        self.state=True
+        serial_text = tk.Label(self, text="Serial Connection")
+        serial_text.pack(side=tk.LEFT,anchor=tk.N,padx="20",pady="3")
+        canvas = tk.Canvas(self, width=25, height=25)
+        if self.state != False:
+            canvas.create_circle(13,13,6, fill="green2",outline="black",width=1)
+        else:
+            canvas.create_circle(13,13,6,outline="black",width=1)
+        canvas.pack(side=tk.LEFT,anchor=tk.N)
         '''
         button = tk.Button(self, text="Go to the start page",
                            command=lambda: controller.show_frame("StartPage"))
