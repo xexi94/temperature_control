@@ -25,7 +25,8 @@ class SampleApp(tk.Tk):
             Bl = tk.Button(popup,text="Okay",command=popup.destroy)
             message.pack()
             Bl.pack(side=tk.BOTTOM,pady=4)
-            popup.mainloop() 
+            popup.mainloop()
+            
         MenuBar=tk.Menu(self)
         #self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
         self.title("ProgramName") 
