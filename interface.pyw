@@ -19,7 +19,7 @@ class SampleApp(tk.Tk):
             if os.name == 'nt':
                 popup.iconbitmap("Images/thermometer.ico") 
             elif os.name == 'posix':
-                null
+                b=0 # see how to add logo
             popup.wm_title("")
             message=tk.Label(popup,text="description")
             Bl = tk.Button(popup,text="Okay",command=popup.destroy)
@@ -34,7 +34,7 @@ class SampleApp(tk.Tk):
         if os.name == 'nt':
             self.iconbitmap("Images/thermometer.ico") 
         elif os.name == 'posix':
-            null   
+            b=0   
         self.geometry("850x550") 
         self.config(menu=MenuBar)
         # the container is where we'll stack a bunch of frames
