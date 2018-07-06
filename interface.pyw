@@ -28,7 +28,11 @@ class SampleApp(tk.Tk):
             Bl.pack(side=tk.BOTTOM,pady=4)
             popup.mainloop()
         def file_save():
-            f = filedialog.asksaveasfilename(initialdir = "/media/sergi/HDD/AN/INTSRUMENTS/temperature_control",title = "Save file",filetypes = (("Text files","*.txt"),("all files","*.*")))
+            if os.name == 'posix':
+                f = filedialog.asksaveasfilename(initialdir = "/media/sergi/HDD/AN/INTSRUMENTS/temperature_control",title = "Save file",filetypes = (("Text files","*.txt"),("all files","*.*")))
+            elif os.name == 'nt':
+                f = filedialog.asksaveasfilename(initialdir = "C:/",title = "Save file",filetypes = (("Text files","*.txt"),("all files","*.*")))
+            
             if f is None:
                 return None
             else:
