@@ -1,4 +1,5 @@
 import tkinter as tk                # python 3
+from tkinter import filedialog
 #from tkinter import font  as tkfont # python 3
 import os
 #import PIL
@@ -11,7 +12,7 @@ class SampleApp(tk.Tk):
         def exit():
             self.destroy()
         
-        tk.Tk.__init__(self, *args, **kwargs)
+        
         def popupmsg():
             popup = tk.Tk()
             popup.resizable(0,0)
@@ -26,10 +27,20 @@ class SampleApp(tk.Tk):
             message.pack()
             Bl.pack(side=tk.BOTTOM,pady=4)
             popup.mainloop()
-            
+        def file_save():
+            f = filedialog.asksaveasfilename(initialdir = "/media/sergi/HDD/AN/INTSRUMENTS/temperature_control",title = "Save file",filetypes = (("Text files","*.txt"),("all files","*.*")))
+            if f is None:
+                return None
+            else:
+                file = open(f,'w')
+                file.write(self.variable)
+                
+
+        tk.Tk.__init__(self, *args, **kwargs)    
         MenuBar=tk.Menu(self)
         #self.title_font = tkfont.Font(family='Helvetica', size=18, weight="bold", slant="italic")
-        self.title("ProgramName") 
+        self.title("ProgramName")
+        self.variable = "Hellomellow" 
         self.resizable(0,0) 
         if os.name == 'nt':
             self.iconbitmap("Images/thermometer.ico") 
@@ -59,7 +70,7 @@ class SampleApp(tk.Tk):
         MenuFile=tk.Menu(MenuBar, tearoff=0)
         MenuFile.add_command(label="New measure",command=lambda: self.show_frame("PageOne"))
         MenuFile.add_separator()
-        MenuFile.add_command(label="Export Data")
+        MenuFile.add_command(label="Export Data",command=file_save)
         MenuFile.add_separator()
         MenuFile.add_command(label="Close",command=lambda: self.show_frame("StartPage"))
         MenuFile.add_command(label="Exit",command=exit)
